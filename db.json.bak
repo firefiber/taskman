@@ -1,0 +1,36 @@
+{
+    "tasks": {
+        "vs": {
+            "parentTask": null,
+            "subTasks": [],
+            "startDate": "2024-12-01T04:50:35.444715",
+            "endDate": null,
+            "sessions": [
+                {
+                    "start": "2024-12-01T04:50:35.444728",
+                    "end": "2024-12-01T06:16:16.373592",
+                    "duration": "PT1H25M40.928864S",
+                    "manuallyStopped": true
+                }
+            ],
+            "totalDuration": 0,
+            "done": false
+        },
+        "x": {
+            "parentTask": null,
+            "subTasks": [],
+            "startDate": "2024-12-01T07:07:38.125989",
+            "endDate": null,
+            "sessions": [
+                {
+                    "start": "2024-12-01T07:07:38.125997",
+                    "end": "2024-12-01T07:07:49.727274",
+                    "duration": "PT11.601277S",
+                    "manuallyStopped": true
+                }
+            ],
+            "totalDuration": 0,
+            "done": false
+        }
+    }
+}
