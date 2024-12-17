@@ -11,12 +11,13 @@ def get_current_date():
 
 class Task(BaseModel):
     name: str
-    parent: Optional[Task] = None 
+    context: Optional[str] = None
     entry_date: str = get_current_date()
     done: bool = False
     begin_date: Optional[str] = None
     end_date: Optional[str] = None
     sessions: Optional[list[Session]] = []
+    super_tasks: Optional[list[Task]] = None 
     sub_tasks: Optional[list[Task]] = []
     total_duration: float = 0.0
 

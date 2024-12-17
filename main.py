@@ -2,10 +2,14 @@ from icecream import ic
 import commands
 
 # commands.create_database()
-task = commands.create_task("autopsy")
-task.create_session()
-ic(task.sessions)
-commands.update_database(commands.update_task(task))
+parent_task = commands.read_task("autopsy")
+print(parent_task)
+new_sub_task = commands.create_task("taskman_project")
+print(new_sub_task)
+commands.update_task(new_sub_task)
+
+parent_task.sub_tasks.append(new_sub_task)
+commands.update_task(parent_task)
 
 
 # print(getattr(task, "entry_date"))
