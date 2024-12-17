@@ -27,54 +27,45 @@ def read_database():
             data = json.load(db)
     except FileNotFoundError as e:
         return e
-    return data
+    tasks = data["tasks"]
+    return tasks
 
 def update_database(updated_data):
     try:
         with open('db.json', 'w') as db:
-            json.dump(updated_data, db, indent=4)
+            data = {"tasks": updated_data}
+            json.dump(data, db, indent=4)
     except FileNotFoundError as e:
         return e
 
 #TASK-COMMANDS
 
-def create_task(name):
-    try:
-        db = read_database()
-        tasks = db["tasks"]
-    except Exception as e:
-        return e
-
-    new_task = Task(name)
-    new_task.entry_date = get_current_date()
-
-    serialized_task = new_task.to_object()
-    db["tasks"][name] = serialized_task
+def create_task(task_name: str):
+    new_task = Task(name=task_name)
     
-    updated_db = update_database(db)
     return new_task 
 
-def read_task():
-    pass
+def read_task(task_name: str):
+    try: 
+        tasks = read_database()
+        selected_task = Task(**tasks[task_name])
+    except Exception as e:
+        return e
+    
+    return selected_task
 
-def update_task():
-    pass
+def update_task(task: Task):
+    tasks = read_database()
+    tasks[task.name] = task.model_dump() 
+
+    return tasks
 
 def delete_task():
     pass
 
-def start_session(task):
-    try:
-        db = read_database()
-        tasks = db["tasks"]
-    except Exception as e:
-        return e
-    
+def start_session() -> Session:
     new_session = Session()
     new_session.start_time = get_current_date()
-
-    serialized_session = new_session.to_object()
-    task.sessions.append(serialized_session)
 
     return new_session
 
