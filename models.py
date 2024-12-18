@@ -17,7 +17,7 @@ class Task(BaseModel):
     begin_date: Optional[str] = None
     end_date: Optional[str] = None
     sessions: Optional[list[Session]] = []
-    super_tasks: Optional[list[Task]] = None 
+    super_tasks: Optional[list[Task]] = []
     sub_tasks: Optional[list[Task]] = []
     total_duration: float = 0.0
 
