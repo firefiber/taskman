@@ -44,7 +44,7 @@ def create_task(task_name: str):
     all_tasks = read_database()
     new_task = Task(name=task_name)
 
-    if all_tasks[task_name]:
+    if task_name in all_tasks:
         raise ValueError("Task already exists.")
     else:
         all_tasks[task_name] = new_task.model_dump()
@@ -66,6 +66,7 @@ def update_task(task: Task):
     all_tasks = read_database()
     all_tasks[task.name] = task.model_dump() 
 
+    update_database(all_tasks)
 
 def delete_task():
     pass

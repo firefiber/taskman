@@ -2,14 +2,13 @@ from icecream import ic
 import commands
 
 # commands.create_database()
-parent_task = commands.read_task("autopsy")
-print(parent_task)
+# parent_task = commands.read_task("autopsy")
+# print(parent_task)
+# commands.create_database()
 new_sub_task = commands.create_task("taskman_project")
-print(new_sub_task)
-commands.update_task(new_sub_task)
+new_sub_task2 = commands.create_task("test")
+new_sub_task3 = commands.create_task("vs_apt-project")
 
-parent_task.sub_tasks.append(new_sub_task)
-commands.update_task(parent_task)
 
 
 # print(getattr(task, "entry_date"))
