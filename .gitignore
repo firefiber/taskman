@@ -293,3 +293,7 @@ __pycache__/
 
 # End of https://www.toptal.com/developers/gitignore/api/pycharm+all,jetbrains+all,webstorm+all,visualstudiocode,intellij+all,venv,dotenv
 
+db.json.bak
+pyproject.toml
+.tmp_log.txt
+process.pid

@@ -2,6 +2,7 @@ import commands as c
 
 import argparse
 import subprocess
+import psutil
 import signal
 import os
 import time
@@ -27,7 +28,9 @@ if args.command == "start":
 if args.command == "stop":
     with open("process.pid", 'r') as f:
         pid = int(f.read().strip())
-    os.kill(pid, signal.SIGTERM)
+    
+    process = psutil.Process(pid)
+    process.terminate()
 
 # Start the second script as a subprocess
 
