@@ -10,28 +10,42 @@ import time
 parser = argparse.ArgumentParser()
 subparsers = parser.add_subparsers(dest="command")
 
-start_parser = subparsers.add_parser("start")
-start_parser.add_argument("task_name", nargs="?", help="Start tracking a task.")
-# start_parser.add_argument('-s', '--structured', action="store_true", help="Structured list of tasks and subtasks.")
+start_task_tracking = subparsers.add_parser("start")
+start_task_tracking.add_argument("task_name")
 
-stop_parser = subparsers.add_parser("stop")
-start_parser.add_argument("task_name", nargs="?", help="Stop tracking a task.")
+stop_task_tracking = subparsers.add_parser("stop")
+stop_task_tracking.add_argument("task_name", nargs="?", help="Stop tracking a task.")
+
+create_new_task = subparsers.add_parser("new")
+create_new_task.add_argument("task_name")
+create_new_task.add_argument("-s", "--struetured", action="store_true", help="Structured list of tasks and subtasks.")
+
+view_tasks = subparsers.add_parser("view")
+view_tasks.add_argument("task_name", nargs="?", help="View task list")
 
 args = parser.parse_args()
 
+# print(f"API PID: {os.getpid()}, Parent PID: {os.getppid()}")
+
 if args.command == "start":
-    process = subprocess.Popen(["python", "tracker.py", "test"])
+    
+    process = subprocess.Popen(["python", "tracker.py", args.task_name],
+                               stdout=subprocess.DEVNULL,
+                               stderr=subprocess.DEVNULL)
     
     with open("process.pid", 'w') as f:
         f.write(str(process.pid))
 
 if args.command == "stop":
+    # print(args.task_name)
     with open("process.pid", 'r') as f:
         pid = int(f.read().strip())
     
     process = psutil.Process(pid)
     process.terminate()
 
+if args.command == "new":
+    print(args)
 # Start the second script as a subprocess
 
 # Main script continues doing its own thing

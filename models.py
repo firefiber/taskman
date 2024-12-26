@@ -28,7 +28,6 @@ class Task(BaseModel):
         new_session = Session(
             start_time = get_current_date()
         )
-        print(new_session)
         self.sessions.append(new_session)
 
         return new_session

@@ -35,10 +35,11 @@ def handle_termination(signum, frame):
         flag = True
         data = [time, flag]
         json.dump(data, log)
+        sys.exit(0)
 
 signal.signal(signal.SIGTERM, handle_termination)
+signal.signal(signal.SIGHUP, handle_termination)
 
 if __name__ == "__main__":
-    print("TEST")
     tracker = Tracker()
     tracker.start(args[1])
