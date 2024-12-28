@@ -57,6 +57,8 @@ def read_task(task_name: str):
     try: 
         tasks = read_database()
         selected_task = Task(**tasks[task_name])
+    except KeyError as e:
+        return f"No task found with name: {task_name}."
     except Exception as e:
         raise e
     

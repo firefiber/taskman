@@ -18,7 +18,7 @@ stop_task_tracking.add_argument("task_name", nargs="?", help="Stop tracking a ta
 
 create_new_task = subparsers.add_parser("new")
 create_new_task.add_argument("task_name")
-create_new_task.add_argument("-s", "--struetured", action="store_true", help="Structured list of tasks and subtasks.")
+create_new_task.add_argument("-s", "--structured", action="store_true", help="Structured list of tasks and subtasks.")
 
 view_tasks = subparsers.add_parser("view")
 view_tasks.add_argument("task_name", nargs="?", help="View task list")
@@ -29,9 +29,7 @@ args = parser.parse_args()
 
 if args.command == "start":
     
-    process = subprocess.Popen(["python", "tracker.py", args.task_name],
-                               stdout=subprocess.DEVNULL,
-                               stderr=subprocess.DEVNULL)
+    process = subprocess.Popen(["python", "tracker.py", args.task_name])
     
     with open("process.pid", 'w') as f:
         f.write(str(process.pid))
@@ -44,8 +42,22 @@ if args.command == "stop":
     process = psutil.Process(pid)
     process.terminate()
 
+if args.command == "view":
+    if args.task_name is not None:
+        task = c.read_task(args.task_name)
+        print(task)
+    else:
+        tasks = c.read_database()
+        print([key for key in tasks.keys()])
+
 if args.command == "new":
-    print(args)
+    if args.structured:
+        pass
+    else:
+        try:
+            c.create_task(args.task_name)
+        except ValueError as e:
+            print(e)
 # Start the second script as a subprocess
 
 # Main script continues doing its own thing
