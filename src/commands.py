@@ -2,7 +2,7 @@ import json
 
 from datetime import datetime
 
-from models import Task, Session
+from src.models import Task, Session
 
 #GENERAL
 

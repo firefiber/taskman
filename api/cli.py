@@ -1,4 +1,4 @@
-import commands as c
+from src import commands as c
 
 import argparse
 import subprocess
@@ -28,20 +28,21 @@ args = parser.parse_args()
 # print(f"API PID: {os.getpid()}, Parent PID: {os.getppid()}")
 
 if args.command == "start":
+    print("started") 
+    # process = subprocess.Popen(["python", "tracker.py", args.task_name])
     
-    process = subprocess.Popen(["python", "tracker.py", args.task_name])
-    
-    with open("process.pid", 'w') as f:
-        f.write(str(process.pid))
+    # with open("process.pid", 'w') as f:
+    #     f.write(str(process.pid))
 
 if args.command == "stop":
     # print(args.task_name)
-    with open("process.pid", 'r') as f:
-        pid = int(f.read().strip())
+    # with open("process.pid", 'r') as f:
+    #     pid = int(f.read().strip())
     
-    process = psutil.Process(pid)
-    process.terminate()
-
+    # process = psutil.Process(pid)
+    # process.terminate()
+    print("stopped")
+     
 if args.command == "view":
     if args.task_name is not None:
         task = c.read_task(args.task_name)

@@ -3,17 +3,20 @@ import sys
 import schedule
 import json
 import signal
+import os
 
-import commands as c
+from src import commands as c
 
 args = sys.argv
 
 class Tracker():
     def __init__(self):
         self.seppuku = False
+        self.temp_storage = 'temp'
+        self.log_file = os.path.join(self.temp_storage, 'tmp_log.txt')
 
     def logger(self):
-        with open('.tmp_log.txt', 'w') as log:
+        with open(self.log_file, 'w') as log:
             time = c.get_current_date()
             json.dump(time, log)
     
@@ -28,9 +31,10 @@ class Tracker():
             schedule.run_pending()
             time.sleep(1)
 
-def handle_termination(signum, frame):
+def handle_termination(self,signum, frame):
     tracker.seppuku = True
-    with open('.tmp_log.txt', 'w') as log:
+
+    with open(tracker.log_file, 'w') as log:
         time = c.get_current_date()
         flag = True
         data = [time, flag]
