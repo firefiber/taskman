@@ -22,7 +22,7 @@ CREATE TABLE Tasks(
     entry_date TEXT DEFAULT CURRENT_TIMESTAMP,
     start_date TEXT,
     end_date TEXT,
-    total_duration REAL,
+    total_duration REAL DEFAULT 0.0,
     FOREIGN KEY(owner_id) REFERENCES Users(id)
 );
 
@@ -72,6 +72,56 @@ CREATE TABLE Assignments(
 );
 
 
+-- INSERT DATA --
+
+-- @block:
+INSERT INTO Users(username) VALUES('test_user');
+
+-- @block:
+INSERT INTO Tasks(owner_id) VALUES((SELECT id FROM Users WHERE username='test_user'));
+
+-- QUERY DATA --
+
+-- @block:
+SELECT * FROM Users;
+
+-- @block:
+SELECT * FROM Tasks;
+
+-- @block:
+
+
+-- DELETE DATA --
+
+-- @block:
+DELETE FROM Users WHERE id='aadb44b13a50e44a3f047532f241f7c9';
+
+
+-- UPDATE DATA --
+
+-- @block:
+UPDATE Tasks 
+SET name='test_task', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- @block:
+SELECT * FROM Users;
 -- DROP TABLES --
 -- @block:
 DROP TABLE Users;
@@ -90,11 +140,3 @@ DROP TABLE Dependencies;
 
 -- @block:
 DROP TABLE Assignments;
-
--- INSERT DATA --
-
--- @block:
-INSERT INTO Users(username) VALUES('test_user');
-
--- @block:
-SELECT * FROM Users;

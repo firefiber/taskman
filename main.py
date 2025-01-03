@@ -1,8 +1,15 @@
 from icecream import ic
-import commands
+from data import db
+# import commands
 
-commands.create_database()
-ic("test")
+db = db.Database()
+# user = db.get_user(id="8524861899b1b81b832723e974988d90")
+user_id = "8524861899b1b81b832723e974988d90"
+new_task = db.create_task(name="test_task3", owner_id=user_id)
+print(new_task)
+
+# commands.create_database()
+# ic("test")
 # parent_task = commands.read_task("autopsy")
 # print(parent_task)
 # commands.create_database()

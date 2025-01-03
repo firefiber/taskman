@@ -298,3 +298,4 @@ pyproject.toml
 .tmp_log.txt
 process.pid
 .vscode/*
+*.db-*

@@ -9,9 +9,18 @@ def get_current_date():
     current_date = datetime.now().isoformat()
     return current_date
 
+class User(BaseModel):
+    id: str
+    username: Optional[str] = None
+    email: Optional[str] = None
+    password: Optional[str] = None
+    join_date: str
+    is_activated: bool = False
+
 
 class Task(BaseModel):
-    name: str
+    name: Optional[str] = None
+    description: Optional[str] = None
     context: Optional[str] = None
     entry_date: str = get_current_date()
     done: bool = False
@@ -43,11 +52,6 @@ class Session(BaseModel):
     was_manually_stopped: bool = False
 
 
-'''
-schedule by:
-    - Duration (seconds, minutes, hours, days, months, years)
-    - 
-'''
     
 class Block(BaseModel):
     task: Task
